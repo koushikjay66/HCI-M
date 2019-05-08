@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>HCI-MCI-M/Assignment I: <!-- your name --></title>
+        <link rel="stylesheet" href="./themes/css/innsbruck.css" title="jQTouch">
+        <script src="./jqt/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="./jqt/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="./prepareLocalStorage.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+          /* 
+            set DEBUG  true to always initalise local storage and
+            to see console messages; set it to false to use an
+            initalised local storage and suppress console messages
+          */
+          var DEBUG = true;
+          
+          // Init jQT
+          var jQT = new $.jQTouch({
+              icon: 'jqtouch.png',
+              icon4: 'jqtouch4.png',
+              addGlossToIcon: false,
+              startupScreen: 'jqt_startup.png',
+              statusBar: 'black-translucent',
+              themeSelectionSelector: '#jqt #themes ul',
+              preloadImages: []
+          });
+          
+          // Local Storage Prepartion
+          function supportsHtml5Storage() {
+            try {
+              return 'localStorage' in window && window['localStorage'] !== null;
+            } catch (e) {
+              return false;
+            }
+          }
+          
+          // Binding Local Callbacks
+          $(document).ready(function(e){
+            
+            // Configure console
+            if(!window.console) window.console = {};
+            if(!DEBUG){
+                var methods = ["log", "debug", "warn", "info"];
+                for(var i=0;i<methods.length;i++){
+                	console[methods[i]] = function(){};
+                }
+            }
+            
+            // Check for Local Storage
+            if (!supportsHtml5Storage()){
+              alert("Local Storage not supported");
+            }
+            else{
+              console.debug("Has HTML5 Local Storage Support")
+              prepareLocalStorage(DEBUG);
+            }
+            
+            // Orientation Callback Event
+            $('body').bind('turn', function(e, data){
+              alert('Orientation: ' + data.orientation);
+            });
+            
+            // Callback for Loading Contents of the Screens
+            $("#home").on("pageAnimationEnd", function(e, info){
+              console.debug('id: ' + this.id + ' and direction: ' + info.direction);
+              // Load data once
+              if (!$(this).data('loaded')) {
+                  home_loadExternalLinks();
+                  $(this).data('loaded', true);  
+                };  
+            });
+            home_loadExternalLinks() // for inital loading for first screen
+            
+            //.. do the same for the other sections
+          });
+          
+          // Scripts and Structures for Home
+          
+          // load links from local storage and append to section in #home
+          function home_loadExternalLinks(){
+            $.each(JSON.parse(localStorage['home_externalLinks']), function() {
+              // build link
+              link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#homeExternalLinks").append(link);
+            });
+            $('#home').data('loaded', true);  
+          }
+  </script>
+</head>
+<body>
+  <!-- Home -->
+  <div id="home" class="current">
+    <div class="toolbar">
+      <h1>WIAI</h1>
+      <a class="button slideup" id="infoButton" href="#about">About</a>
+    </div>
+    <h2>Find a good Heading here</h2>
+    <ul class="rounded">
+      <li class="arrow"><a href="studies.html">Studies</a></li>
+      <li class="arrow"><a href="#research">Research</a></li>
+      <li class="arrow"><a href="#faculty">The Faculty</a></li>
+      <li class="arrow"><a href="#subjectgroups">Subject Groups</a></li>
+    </ul>
+    <h2>External Links</h2>
+    <ul class="rounded" id="homeExternalLinks">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+  </div>
+  <!-- About -->
+  <div id="about">
+    <div class="toolbar">
+      <h1>About</h1>
+      <a class="button slideup" id="closeButton" href="#home">Close</a>
+    </div>
+    <div class="info">
+      <p>This application is part of the <em>Assignment I</em> of the lecture module HCI-MCI-M which is held by Prof. Tom Gross as chair of the <a href="http://www.uni-bamberg.de/hci" target="_blank">HCI Group</a> at the <a href="http://www.uni-bamberg.de/" target="_blank">University of Bamberg</a>.</p>
+      <p>The aim is to receive insights in the conceptualisation process of creating mobile applications.</p>
+    </div>
+  </div>
+  <!-- Space for your contents -->
+  <!-- Studies -->
+  <div id="studies">
+    <div class="toolbar">
+      <h1>Study</h1>
+      <a class="back" href="#home">Back</a>
+    </div>
+    <!-- Please place contents here using HTML & JavaScript -->
+  </div>
+  <!-- Research -->
+  <div id="research">
+    <div class="toolbar">
+      <h1>Research</h1>
+      <a class="back" href="#home">Back</a>
+    </div>
+    <!-- Please place contents here using HTML & JavaScript -->
+  </div>
+  <!-- The Faculty -->
+  <div id="faculty">
+    <div class="toolbar">
+      <h1>The Faculty</h1>
+      <a class="back" href="#home">Back</a>
+    </div>
+    <!-- Please place contents here using HTML & JavaScript -->
+  </div>
+  <!-- Subject Groups -->
+  <div id="subjectgroups">
+    <div class="toolbar">
+      <h1>Service</h1>
+      <a class="back" href="#home">Back</a>
+    </div>
+    <!-- Please place contents here using HTML & JavaScript -->
+  </div>
+</body>
+</html>
