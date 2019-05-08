@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>HCI-MCI-M/Assignment I: Kowshik</title>
+        <title>HCI-MCI-M/Assignment I: <!-- your name --></title>
         <link rel="stylesheet" href="./themes/css/innsbruck.css" title="jQTouch">
         <script src="./jqt/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="./jqt/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
@@ -43,7 +43,7 @@
             if(!DEBUG){
                 var methods = ["log", "debug", "warn", "info"];
                 for(var i=0;i<methods.length;i++){
-                	console[methods[i]] = function(){};
+                  console[methods[i]] = function(){};
                 }
             }
             
@@ -70,7 +70,9 @@
                   $(this).data('loaded', true);  
                 };  
             });
-            home_loadExternalLinks() // for inital loading for first screen
+            home_loadExternalLinks(); // for inital loading for first screen
+            study_links();
+            research_links();
             
             //.. do the same for the other sections
           });
@@ -87,6 +89,33 @@
             });
             $('#home').data('loaded', true);  
           }
+
+          function study_links(){
+
+            $.each(JSON.parse(localStorage['studies_links_']), function() {
+              // build link
+              var link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#studies_links").append(link);
+              
+            });
+            $('#studies').data('loaded', true);  
+          }
+
+
+           function research_links(){
+
+            $.each(JSON.parse(localStorage['research_links_']), function() {
+              // build link
+              var link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#research_links").append(link);
+              
+            });
+            $('#research').data('loaded', true);  
+          }
+
+
   </script>
 </head>
 <body>
@@ -98,10 +127,9 @@
     </div>
     <h2>Find a good Heading here</h2>
     <ul class="rounded">
-      <li class="arrow"><a href="#studies">Studies</a></li>
+      
       <li class="arrow"><a href="#research">Research</a></li>
-      <li class="arrow"><a href="#faculty">The Faculty</a></li>
-      <li class="arrow"><a href="#subjectgroups">Subject Groups</a></li>
+      <li class="arrow"><a href="#studies">Studies</a></li>
     </ul>
     <h2>External Links</h2>
     <ul class="rounded" id="homeExternalLinks">
@@ -131,32 +159,115 @@
     <h2>Find all Study related info Here</h2>
       <ul class="rounded">
          <li class="arrow"><a href="#exchange_students">Exchange Students</a></li>
-         <li class="arrow"><a href="# ">Non-Exchange Student(Undergrad)</a></li>
-         <li class="arrow"><a href="#studies">Non-Exchange Students(Master)</a></li>
+         <li class="arrow"><a href="#non_exchange_students_undergrad">Non-Exchange Student(Undergrad)</a></li>
+         <li class="arrow"><a href="#non_exchange_students_ms">Non-Exchange Students(Master)</a></li>
       </ul>
       <a class="back" href="#home">Back</a>
-    </div>
+    
+    <h2>Further Information</h2>
+    <ul class="rounded" id="studies_links">
     <!-- Please place contents here using HTML & JavaScript -->
-  </div>
+</div>
 
   <!-- Now Studies part need to complete --> 
   <!-- Exchange Students -->
   <div id="exchange_students">
     <div class="toolbar">
       <h1>Exchange Students</h1>
-      <a class="back" href="#home">Back</a>
+      <a class="back" href="#studies">Back</a>
     </div>
     <h2>Interested in Studying at Bamberg!</h2>
       <ul class="rounded">
          <li class="arrow"><a href="#exchange_students_how_to_apply">How do I apply ?</a></li>
-         <li class="arrow"><a href="# ">Next Steps</a></li>
-         <li class="arrow"><a href="#studies">Before Leaving Bamberg</a></li>
+         <li class="arrow"><a href="#exchange_students_next_steps">Next Steps</a></li>
+         <li class="arrow"><a href="#exchange_students_before_leaving_bamberg">Before Leaving Bamberg</a></li>
       </ul>
       <a class="back" href="#home">Back</a>
     </div>
     <!-- Please place contents here using HTML & JavaScript -->
   </div>
+  <!-- End of div exchange_students --> 
 
+  <div id="non_exchange_students_undergrad">
+    <div class="toolbar">
+      <h1>Non Exchange Students Undergrad</h1>
+      <a class="back" href="#studies">Back</a>
+    </div>
+    <h2>Interested in Studying at Bamberg!</h2>
+      <ul class="rounded">
+         <li class="arrow"><a href="#non_exchange_students_undergrad_prior_to_apply">Prior to Applying</a></li>
+         <li class="arrow"><a href="#non_exchange_students_undergrad_how_to_apply">How Do I Apply?</a></li>
+         <li class="arrow"><a href="#non_exchange_students_undergrad_after_applying">After the Application</a></li>
+      </ul>
+      <a class="back" href="#studies">Back</a>
+    </div>
+    <!-- Please place contents here using HTML & JavaScript -->
+  </div>
+  <!-- End of div non_exchange_students_undergrad --> 
+
+    <div id="non_exchange_students_ms">
+      <div class="toolbar">
+        <h1>Non Exchange Students MS</h1>
+        <a class="back" href="#studies">Back</a>
+      </div>
+      <h2>Welcome to Graduate Studies!</h2>
+        <ul class="rounded">
+           <li class="arrow"><a href="#non_exchange_students_ms_application_process">Application Process</a></li>
+           <li class="arrow"><a href="#non_exchange_students_ms_application_deadline">Application Deadline</a></li>
+        </ul>
+        <a class="back" href="#studies">Back</a>
+      </div>
+      <!-- Please place contents here using HTML & JavaScript -->
+  </div>
+  <!-- End of div non_exchange_students_ms --> 
+
+
+<!-- Second Level Starts from Here --> 
+
+<!-- Non Exchange Students MS --> 
+
+<div id="non_exchange_students_ms_application_process">
+    <div class="toolbar">
+      <h1>How do I apply ?</h1>
+      <a class="back" href="#exchange_students">Back</a>
+    </div>
+    <h2>Application Process</h2>
+      <div class="info">
+        Your application should be handed in with all the necessary documents.
+          Please keep a copy of the PDF file of the online application form with you! it contains your user name and initial password for the information portal where you can access the result at the end of the application process.
+          Please be aware, that you have read all the information about the language requirements at the University of Bamberg.
+          Please make sure, your documents have the required certifcations.
+          If your documents are not in English or French, we need a translation!
+          After we received your application, we will check your application and forward it to the examination board. The wohle application process may take up to six weeks.
+          The University of Bamberg has no cooperation with uni-assist. Conversion of your grade is done by the academic registrar. We use the bayerische Formel and adhere to the guidlines set by the Kultusministerkonferenz.
+      </div>
+      <h2>External Links</h2>
+      <ul class="rounded" id="non_exchange_students_ms_application_process_links">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+    
+ </div>
+<!-- End of DIV ID : non_exchange_students_ms_application_process --> 
+
+
+<div id="non_exchange_students_ms_application_deadline">
+    <div class="toolbar">
+      <h1>How do I apply ?</h1>
+      <a class="back" href="#exchange_students">Back</a>
+    </div>
+    <h2>Application Process</h2>
+      <div class="info">
+       Application period for the winter semester starts around May, 15th, Application period for the summer semester around November, 15th.For applicants who need visa it is recommended to send a complete application for the winter semester until July, 15th, for the summer semester around January, 15th. However, these dates are not a deadline!
+      </div>
+      <h2>Further Information</h2>
+      <ul class="rounded" id="non_exchange_students_ms_application_deadline_links">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+    
+ </div>
+<!-- End of DIV ID : non_exchange_students_ms_application_process --> 
 
  <div id="exchange_students_how_to_apply">
     <div class="toolbar">
@@ -167,38 +278,227 @@
       <div class="info">
         Students who wish to take part in an exchange programme at the University of Bamberg must first apply to the responsible persons (e.g. Study Abroad Office) at their home university. The selection of applicants for the programme is carried out by the home university. The home university nominates candidates who must then complete the University of Bamberg’s online application. Selected applicants will either receive the link to this application from their home university, or it will be sent via e-mail by the University of Bamberg.
       </div>
+      <h2>External Links</h2>
+      <ul class="rounded" id="application_procedure_for_exchange_students_links">
+      <!-- Links will be placed via JavaScript -->
+
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+    
+ </div>
+<!-- End of DIV ID : exchange_students_how_to_apply --> 
+
+ <div id="exchange_students_next_steps">
+    <div class="toolbar">
+      <h1>How do I apply ?</h1>
       <a class="back" href="#exchange_students">Back</a>
     </div>
+    <h2>Preparation Prior to Going Abroad</h2>
+      <div class="info">
+       All exchange students are required to take a placement test prior to beginning their exchange studies. You will receive a link to this test via e-mail in January (for the summer semester) or June (for the winter semester).
+      </div>
+      <h2>Further Info</h2>
+      <ul class="rounded" id="exchange_students_next_steps_links">
+      <!-- Links will be placed via JavaScript -->
+
+    </ul>
     <!-- Please place contents here using HTML & JavaScript -->
-  </div>
+    
+ </div>
+<!-- End of DIV ID : exchange_students_next_steps --> 
 
+ <div id="exchange_students_before_leaving_bamberg">
+    <div class="toolbar">
+      <h1>How do I apply ?</h1>
+      <a class="back" href="#exchange_students">Back</a>
+    </div>
+    <h2>Going Abroad</h2>
+      <div class="info">
+      Please check information on Uni Bamberg Website. Please Exmatriculate at the registrar’s office during opening hours and Notify the Citizen Registration Office (Einwohneramt) of your departure.
+      </div>
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+    
+ </div>
+<!-- End of DIV ID : exchange_students_next_steps --> 
 
+<!-- Non Exchange Students Undergrad --> 
 
+<div id="non_exchange_students_undergrad_prior_to_apply">
+    <div class="toolbar">
+      <h1>How do I apply ?</h1>
+      <a class="back" href="#non_exchange_students_undergrad">Back</a>
+    </div>
+    <h2>Prior To Applying</h2>
+      <div class="info">
+       The information on this page is only for: applications for undergraduate courses (Bachelor’s, teacher training); DSH semester course; short-term non-degree study programme <em>(Kurzzeitstudium ohne Abschlussmöglichkeit); Studienkolleg.</em>
+      </div>
+      <a class="back" href="#exchange_students">Back</a>
+      <h2>Further Checkpoint</h2>
+      <ul class="rounded" id="non_exchange_students_undergrad_prior_to_apply_links">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+<!-- End of DIV ID : exchange_students_how_to_apply --> 
+<div id="non_exchange_students_undergrad_how_to_apply">
+    <div class="toolbar">
+      <h1>How do I apply ?</h1>
+      <a class="back" href="#non_exchange_students_undergrad">Back</a>
+    </div>
+    <h2>How to Apply?</h2>
+      <div class="info">
+       You need several documents for applications. Like Application Check List of the International Office , Officially Certified Photocopies (Amtliche Beglaubigungen)
+      </div>
+      
+      <h2>Further Checkpoint</h2>
+      <ul class="rounded" id="non_exchange_students_undergrad_how_to_apply_links">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+<!-- End of DIV ID : exchange_students_how_to_apply --> 
+
+<div id="non_exchange_students_undergrad_after_applying">
+    <div class="toolbar">
+      <h1>How do I apply ?</h1>
+      <a class="back" href="#non_exchange_students_undergrad">Back</a>
+    </div>
+    <h2>How to Apply?</h2>
+      <div class="info">
+      When all documentation has been submitted and when both the academic and German language proficiency requirements are fulfilled, you will receive an information leaflet with precise information on the rest of the admission procedure
+      </div>
+      <h2>Further Checkpoint</h2>
+      <ul class="rounded" id="non_exchange_students_undergrad_after_applying_links">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+<!-- End of DIV ID : exchange_students_how_to_apply --> 
 
   <!-- Research -->
   <div id="research">
     <div class="toolbar">
-      <h1>Research</h1>
+      <h1>Study</h1>
       <a class="back" href="#home">Back</a>
+    </div>
+    <h2>Reseach Section</h2>
+      <ul class="rounded">
+         <li class="arrow"><a href="#reserch_service_for_scholars">Service for Scholars</a></li>
+         <li class="arrow"><a href="#reserch_ai">Academic Institutions</a></li>
+      </ul>
+         <h2>Outside Link</h2>
+      <ul class="rounded" id="research_links">
     </div>
     <!-- Please place contents here using HTML & JavaScript -->
   </div>
-  <!-- The Faculty -->
+<div id="reserch_service_for_scholars">
+    <div class="toolbar">
+      
+      <a class="back" href="#research">Back</a>
+    </div>
+    <h2>Service for Scholars</h2>
+      <ul class="rounded">
+         <li class="arrow"><a href="#reserch_service_for_scholars_wc">WC for IMS</a></li>
+         <li class="arrow"><a href="#reserch_service_for_scholars_dcs">Dual Career Service</a></li>
+      </ul>
+      <h2>Outside Link</h2>
+      <ul class="rounded" id="reserch_service_for_scholars_links">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+
+ <div id="reserch_service_for_scholars_wc">
+    <div class="toolbar">
+      <h1>Dual Career Service</h1>
+      <a class="back" href="#reserch_service_for_scholars">Back</a>
+    </div>
+      <div class="info">
+      The Welcome Center is a service facility for all internationally mobile scholars at the Otto-Friedrich-Universität Bamberg.We offer extensive advice as well as practical support with regard to the preparation and the realization of your stay in Bamberg. We can provide you with information and targeted assistance in all matters related to the non subject-specific aspects of your visit.
+      </div>
+      <h2>Further Checkpoint</h2>
+      <ul class="rounded" id="reserch_service_for_scholars_wc_links">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+
+ <div id="reserch_service_for_scholars_dcs">
+    <div class="toolbar">
+      <h1>Dual Career Service</h1>
+      <a class="back" href="#reserch_service_for_scholars">Back</a>
+    </div>
+      <div class="info">
+      Auch die Beratung von Doppelkarrierepaaren (Dual Career Service) stellt an Universitäten heute eine zunehmend dringliche Aufgabe dar: Immer mehr Paare stehen angesichts der wachsenden Anforderungen an ihre räumliche Mobilität vor der Herausforderung, familiäre und berufliche Interessen in Einklang zu bringen.
+      </div>
+       <h2>Further Checkpoint</h2>
+      <ul class="rounded" id="reserch_service_for_scholars_wc_links">
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+
+
+
+<div id="reserch_ai">
+    <div class="toolbar">
+      
+      <a class="back" href="#research">Back</a>
+    </div>
+    <h2>Service for Scholars</h2>
+      <ul class="rounded">
+         <li class="arrow"><a href="#reserch_ai_ci">Centres & Institutes</a></li>
+         <li class="arrow"><a href="#reserch_ai_tra">Trimberg Research Academy(TRAc)</a></li>
+      </ul>
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+
+ <div id="reserch_ai_ci">
+    <div class="toolbar">
+      
+      <a class="back" href="#reserch_ai">Back</a>
+    </div>
+    <h2>Centres & Institutes</h2>
+      <div class="info">
+      There are three different career and institute in uni bamberg. You may find in below links. 
+      </div>
+       <h2>Links</h2>
+      <ul class="rounded" id="reserch_ai_ci_links">
+    
+     
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+
+ <div id="reserch_ai_tra">
+    <div class="toolbar">
+      
+      <a class="back" href="#reserch_ai">Back</a>
+    </div>
+    <h2>Trimberg Research Academy(TRAc)</h2>
+      <div class="info">
+      Die Trimberg Research Academy (TRAc), benannt nach dem mittelalterlichen Universalgelehrten Hugo von Trimberg, ist eine Service-Einrichtung für Wissenschaftlerinnen und Wissenschaftler. Insbesondere dem wissenschaftlichen Nachwuchs bieten wir ein breites Unterstützungsangebot in allen Karrierephasen von der Promotion über die Postdoc-Phase bis hin zur Berufungsfähigkeit und der Etablierung als Professorin oder Professor.
+
+        Zentrale Elemente bilden dabei individuelle Beratung, ein Fortbildungsprogramm sowie die Information über Fördermöglichkeiten sowohl der Universität als auch externer Einrichtungen. Auch die Vorbereitung eines Drittmittelantrags begleitet das Team der TRAc gerne in der ersten Phase.
+        </div>    
+     
+    <!-- Please place contents here using HTML & JavaScript -->
+ </div>
+
+  <!-- 
   <div id="faculty">
     <div class="toolbar">
       <h1>The Faculty</h1>
       <a class="back" href="#home">Back</a>
     </div>
-    <!-- Please place contents here using HTML & JavaScript -->
+  
   </div>
-  <!-- Subject Groups -->
+  
   <div id="subjectgroups">
     <div class="toolbar">
       <h1>Service</h1>
       <a class="back" href="#home">Back</a>
     </div>
-    <!-- Please place contents here using HTML & JavaScript -->
-  </div>
+    
+  </div>The Faculty -->
 
 
   <!-- Now this is time to do my part --> 

@@ -1,5 +1,7 @@
 
+
 function prepareLocalStorage(inDevelopment){
+
   hasPrepared = localStorage['prepareLocalStorage'];
   if (hasPrepared != 'done' || inDevelopment){
     console.debug('Initalsing LocalStorage');
@@ -11,11 +13,6 @@ function prepareLocalStorage(inDevelopment){
        title: "University of Bamberg",
        href: "http://www.uni-bamberg.de"
       },
-      koushik:{
-
-        title: "University of Tuntuni",
-        href: "http://www.uni-bamberg.de"
-      },
       wiai: {
        title: "WIAI.de",
        href: "http://www.wiai.de"
@@ -25,8 +22,31 @@ function prepareLocalStorage(inDevelopment){
        href: "http://www.feki.de"
       }
     };
-    localStorage.setItem('home_externalLinks', JSON.stringify(home_externalLinks));
+
     
+
+
+    var studies_links = {
+      link_1: {
+       title: "Partner Universities",
+       href: "https://www.uni-bamberg.de/en/studies/partner-universities/"
+      },
+      link_2: {
+       title: "Living and Studying in Bamberg",
+       href: "https://www.uni-bamberg.de/en/studies/living-studying/"
+      }
+    };
+
+     var research_links_ = {
+      link_1: {
+       title: "Research Profiles",
+       href: "https://www.uni-bamberg.de/en/research/research-profile/"
+      }
+    };
+    
+    localStorage.setItem('studies_links_', JSON.stringify(studies_links));
+    localStorage.setItem('research_links_', JSON.stringify(research_links_));
+    localStorage.setItem('home_externalLinks', JSON.stringify(home_externalLinks));
     
     // ****  Prepare Local Storage for Other Screens
     // you can fill the local storage with your data
